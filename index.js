@@ -5,7 +5,7 @@ import Cards from "./models/dbCards.js";
 import Cors from "cors";
 import Messages from "./models/dbMessages.js";
 import Profile from "./models/dbProfile.js";
-
+import path from 'path';
 
 dotenv.config();
 
@@ -16,6 +16,17 @@ const port= process.env.PORT||8001;
 //middleware
 app.use(express.json());
 app.use(Cors());
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
 
 //db config
 var mongoDB = process.env.URI;
