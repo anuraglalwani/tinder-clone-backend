@@ -17,16 +17,16 @@ const port= process.env.PORT||8001;
 app.use(express.json());
 app.use(Cors());
 
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
-});
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, "./client/build")));
+// app.get("*", function (_, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./client/build/index.html"),
+//     function (err) {
+//       res.status(500).send(err);
+//     }
+//   );
+// });
 
 //db config
 var mongoDB = process.env.URI;
